@@ -4,6 +4,7 @@ import Apropos from "./Apropos";
 import Projects from "./Projects";
 import Contact from "./Contact";
 import PageIntro from "./PageIntro";
+import AdminPage from "./AdminPage";
 import gsap from "gsap";
 
 function MainContent({ darkMode, toggleDarkMode }) {
@@ -14,6 +15,8 @@ function MainContent({ darkMode, toggleDarkMode }) {
     "/about": { title: "À propos de moi", description: "Découvrez mon parcours, mes compétences et mon expérience." },
     "/projects": { title: "Mes Projets", description: "Voici quelques-uns des projets sur lesquels j'ai travaillé." },
     "/contact": { title: "Contactez-moi", description: "N'hésitez pas à me contacter pour toute collaboration ou question." },
+    "/adminpage": { title: "les-messages", description: "voir les messages envoyés." },
+
   };
 
   useEffect(() => {
@@ -48,6 +51,8 @@ function MainContent({ darkMode, toggleDarkMode }) {
           <Link to="/about" className="hover:underline nav-link">À propos</Link>
           <Link to="/projects" className="hover:underline nav-link">Projets</Link>
           <Link to="/contact" className="hover:underline nav-link">Contact</Link>
+          <Link to="/adminpage" className="hover:underline nav-link">AdminPage</Link>
+
         </nav>
 
         {/* Bouton Dark Mode */}
@@ -63,6 +68,8 @@ function MainContent({ darkMode, toggleDarkMode }) {
         <Link to="/about" className="block px-4 py-2 hover:bg-blue-500">À propos</Link>
         <Link to="/projects" className="block px-4 py-2 hover:bg-blue-500">Projets</Link>
         <Link to="/contact" className="block px-4 py-2 hover:bg-blue-500">Contact</Link>
+        <Link to="/adminpage" className="block px-4 py-2 hover:bg-blue-500">AdminPage</Link>
+
       </div>
 
       {/* Contenu Principal */}
@@ -88,6 +95,7 @@ N'hésitez pas à explorer les différentes sections pour en savoir plus sur mon
           <Route path="/about" element={<Apropos />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/adminpage" element={<AdminPage />} />
         </Routes>
       </main>
     </div>
