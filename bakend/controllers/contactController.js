@@ -1,6 +1,6 @@
-const User = require('../Models/User');
+const Contact = require('../Models/Contact');
 
-exports.createUser = async (req, res) => {
+exports.createContact = async (req, res) => {
   try {
     const { name, email, phone, message } = req.body;
 
@@ -12,42 +12,44 @@ exports.createUser = async (req, res) => {
     if (!emailRegex.test(email)) {
       return res.status(400).json({ message: 'Format de l\'email invalide.' });
     }
-    const newUser = new User({ name, email, phone, message });
 
-    await newUser.save();
+    const newContact = new Contact({ name, email, phone, message });
 
-    res.status(201).json({ message: 'User enregistré avec succès.', User: newUser });
+    await newContact.save();
+
+    res.status(201).json({ message: 'Message enregistré avec succès.', contact: newContact });
   } catch (error) {
-    console.error('Erreur lors de l\'enregistrement du user :', error);
+    console.error('Erreur lors de l\'enregistrement du message :', error);
     res.status(500).json({ message: 'Erreur serveur.' });
   }
 };
 
-exports.getAllUsers = async (req, res) => {
+exports.getAllContacts = async (req, res) => {
   try {
-    const Users = await User.find();
+    const contacts = await Contact.find(); 
 
-    res.status(200).json(Users);
+    res.status(200).json(contacts);
   } catch (error) {
-    console.error('Erreur lors de la récupération des Users :', error);
+    console.error('Erreur lors de la récupération des messages :', error);
     res.status(500).json({ message: 'Erreur serveur.' });
   }
 };
 
-exports.deleteUser = async (req, res) => {
+// Supprimer un message/contact
+exports.deleteContact = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const User = await User.findById(id);
-    if (!User) {
-      return res.status(404).json({ message: 'User non trouvé.' });
+    const contact = await Contact.findById(id); // Utiliser 'Contact' au lieu de 'User'
+    if (!contact) {
+      return res.status(404).json({ message: 'Message non trouvé.' });
     }
 
-    await User.findByIdAndDelete(id);
+    await Contact.findByIdAndDelete(id);
 
-    res.status(200).json({ message: 'User supprimé avec succès.' });
+    res.status(200).json({ message: 'Message supprimé avec succès.' });
   } catch (error) {
-    console.error('Erreur lors de la suppression du User :', error);
+    console.error('Erreur lors de la suppression du message :', error);
     res.status(500).json({ message: 'Erreur serveur.' });
   }
 };
